@@ -1,4 +1,6 @@
 from rest_framework import generics, viewsets
+from rest_framework.generics import RetrieveAPIView
+
 from .models import Course, Lesson
 from .serializers import CourseSerializer, LessonSerializer
 

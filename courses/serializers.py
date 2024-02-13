@@ -1,14 +1,28 @@
 from rest_framework import serializers
+from rest_framework.relations import SlugRelatedField
+
 from .models import Course, Lesson
 
 
-class CourseSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Course
-        fields = '__all__'
-
-
 class LessonSerializer(serializers.ModelSerializer):
+    course = SlugRelatedField(slug_field='title', queryset=Course.objects.all())
+
     class Meta:
         model = Lesson
-        fields = '__all__'
+        fields = ['id', 'title', 'description', 'preview', 'video_link', 'course']
+
+
+class CourseSerializer(serializers.ModelSerializer):
+    num_of_lessons = serializers.SerializerMethodField()
+    lessons = LessonSerializer(many=True, read_only=True)
+
+    def get_num_of_lessons(self, obj):
+        return obj.lessons.count()
+
+
+    class Meta:
+        model = Course
+        fields = ['id', 'title', 'preview', 'description', 'num_of_lessons', 'lessons']
+
+
+
