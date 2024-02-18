@@ -9,7 +9,7 @@ class LessonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Lesson
-        fields = ['id', 'title', 'description', 'preview', 'video_link', 'course']
+        fields = ['id', 'title', 'description', 'preview', 'video_link', 'course', 'owner']
 
 
 class SimpleLessonSerializer(serializers.ModelSerializer):
@@ -27,4 +27,4 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ['id', 'title', 'preview', 'description', 'num_of_lessons', 'lessons']
+        fields = ['id', 'title', 'preview', 'description', 'num_of_lessons', 'lessons', 'owner']

@@ -1,7 +1,5 @@
-from django.db import models
 from django.contrib.auth.models import AbstractUser
-
-from courses.models import Course, Lesson
+from django.db import models
 
 
 class User(AbstractUser):
@@ -13,6 +11,9 @@ class User(AbstractUser):
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
+
+
+from courses.models import Course, Lesson #Ошибка скорее всего связана с импортом из courses.models, который ссылается на модели курсов и уроков до их объявления.
 
 
 class Payment(models.Model):
