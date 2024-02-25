@@ -1,6 +1,5 @@
 from rest_framework import generics, viewsets, permissions
-from rest_framework.decorators import permission_classes
-from rest_framework.generics import RetrieveAPIView, get_object_or_404
+from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -64,7 +63,7 @@ class LessonListAPIView(generics.ListAPIView):
     def get_permissions(self):
         if self.request.method == 'GET':
             # Для GET-запросов проверяем только IsAuthenticated и IsNotModerator
-            return [permissions.IsAuthenticated(), IsNotModerator()]
+            return [permissions.IsAuthenticated(), IsModerator()]
         elif self.request.method == 'POST':
             # Для POST-запросов проверяем только IsAuthenticated и IsModerator
             return [permissions.IsAuthenticated(), IsModerator()]
@@ -78,7 +77,7 @@ class LessonRetrieveAPIView(generics.RetrieveAPIView):
 
 class LessonCreateAPIView(generics.CreateAPIView):
     serializer_class = LessonSerializer
-    permission_classes = [IsAuthenticated and IsNotModerator]
+    permission_classes = [IsAuthenticated, IsNotModerator]
 
     def perform_create(self, serializer):
         # При создании урока добавляем текущего пользователя как владельца
@@ -125,6 +124,8 @@ class SubscriptionAPIView(APIView):
 
         # Возвращаем ответ в API
         return Response({"message": message})
+
+
 
 
 # class CourseListCreateAPIView(generics.ListCreateAPIView):

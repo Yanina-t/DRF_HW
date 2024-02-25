@@ -10,7 +10,7 @@ class LessonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Lesson
-        fields = ['id', 'title', 'description', 'preview', 'video_link', 'course', 'owner']
+        fields = ['id', 'title', 'description', 'preview', 'video_link', 'course', 'owner', 'price']
         validators = [
             YouTubeLinkValidator(field='video_link')
         ]
@@ -37,7 +37,7 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ['id', 'title', 'preview', 'description', 'num_of_lessons', 'lessons', 'owner', 'is_subscribed']
+        fields = ['id', 'title', 'preview', 'description', 'num_of_lessons', 'lessons', 'owner', 'is_subscribed', 'price']
 
     def get_is_subscribed(self, obj):
         # Получаем текущего пользователя

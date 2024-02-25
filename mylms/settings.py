@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'drf_yasg',
     'django_filters',
     'users',
     'courses',
@@ -146,3 +147,5 @@ REST_FRAMEWORK = {
             'rest_framework.permissions.AllowAny',
         ]
 }
+
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
