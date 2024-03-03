@@ -78,6 +78,13 @@ class PaymentCreateAPIView(APIView):
             return Response({'error': 'Failed to create checkout session'}, status=status.HTTP_400_BAD_REQUEST)
 
 
+#{
+#     "user": 1,
+#     "payment_date": "2024-02-25",
+#     "amount": 50.00,
+#     "payment_method": "cash"
+# }
+
 class PaymentStatusAPIView(APIView):
     def get(self, request, pk, format=None):
         # Получаем запись о платеже по его идентификатору
