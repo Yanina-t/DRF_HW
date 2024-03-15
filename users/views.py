@@ -1,4 +1,3 @@
-from django.db.models.functions import datetime
 from django.utils import timezone
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, generics, status
@@ -7,9 +6,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from users.models import User, Payment
 from users.serializers import UserSerializer, PaymentSerializer, UserRegistrationSerializer
 from users.services import create_product, create_price
+
+from users.models import User, Payment
 
 
 # Create your views here.
@@ -63,7 +63,7 @@ class PaymentCreateAPIView(APIView):
 
         # Создаем запись о платеже в нашей системе
         payment = Payment.objects.create(user=user, amount=amount, payment_method=payment_method,
-                                          product_id=product_id, price_id=price_id, payment_date=payment_date)
+                                         product_id=product_id, price_id=price_id, payment_date=payment_date)
 
         # Создаем сессию для платежа в Stripe
         success_url = "http://example.com/success"  # Замените на ваш URL успешного платежа
@@ -78,7 +78,7 @@ class PaymentCreateAPIView(APIView):
             return Response({'error': 'Failed to create checkout session'}, status=status.HTTP_400_BAD_REQUEST)
 
 
-#{
+# {
 #     "user": 1,
 #     "payment_date": "2024-02-25",
 #     "amount": 50.00,

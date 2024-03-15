@@ -12,15 +12,25 @@ from courses.models import Course, Subscription
 def send_course_update_email(course_id):
     course = Course.objects.get(id=course_id)
 
+    # Получаем время последнего обновления курса
+    last_update_time = course.updated_at
+
+    # Проверяем каждый урок внутри курса на наличие более позднего обновления
+    for lesson in course.lessons.all():
+        # Если время обновления урока позже, чем время последнего обновления курса,
+        # обновляем время последнего обновления курса
+        if lesson.updated_at > last_update_time:
+            last_update_time = lesson.updated_at
+
     # Проверяем, прошло ли более 4 часов с момента последнего обновления
-    if timezone.now() - course.updated_at > timedelta(hours=4):
+    if timezone.now() - last_update_time > timedelta(hours=4):
+        subscriptions = Subscription.objects.filter(course=course)
         # Отправляем уведомление
-        # Ваш код отправки электронной почты
         send_mail(
             'Course Update Notification',
             'The course you subscribed to has been updated.',
             'from@example.com',
-            [Subscription.user.email],
+            [subscription.user.email for subscription in subscriptions],
             fail_silently=False,
         )
 

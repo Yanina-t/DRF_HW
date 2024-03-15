@@ -4,8 +4,8 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-from users.apps import UsersConfig
-from users.views import UserViewSet, PaymentViewSet, UserRegistrationView, PaymentCreateAPIView
+from my_lms_project.users.apps import UsersConfig
+from my_lms_project.users.views import UserViewSet, PaymentViewSet, UserRegistrationView, PaymentCreateAPIView
 
 app_name = UsersConfig.name
 

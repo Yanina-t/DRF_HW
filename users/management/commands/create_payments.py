@@ -1,7 +1,9 @@
 from django.core.management.base import BaseCommand
-from users.models import Payment, User
+
 from datetime import datetime
 from decimal import Decimal
+
+from users.models import User, Payment
 
 
 class Command(BaseCommand):

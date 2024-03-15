@@ -1,7 +1,6 @@
 from django.db import models
-
-from users.models import User
 from django.utils import timezone
+from users.models import User
 
 NULLABLE = {'blank': True, 'null': True}
 

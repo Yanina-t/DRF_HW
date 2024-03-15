@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+
+from courses.models import Lesson, Course
 from users.services import create_checkout_session
 
 
@@ -15,7 +17,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
 
-from courses.models import Course, Lesson #Ошибка скорее всего связана с импортом из courses.models, который ссылается на модели курсов и уроков до их объявления.
+# Ошибка скорее всего связана с импортом из courses.models, который ссылается на модели курсов и уроков до их объявления.
 
 
 class Payment(models.Model):
