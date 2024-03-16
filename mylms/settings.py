@@ -84,9 +84,10 @@ DATABASES = {
     'default': {
         'ENGINE': os.getenv('DB_ENGINE', default=''),
         'NAME': os.getenv('DB_NAME', default=''),
-        'USER': 'postgres',
+        'USER': os.getenv('DB_USER', default=''),
         'PASSWORD': os.getenv('DB_PASSWORD', default=''),
         'HOST': 'db',
+        'PORT': '5432',
     }
 }
 
