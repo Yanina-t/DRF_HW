@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from courses.models import Lesson, Course
+
 from users.services import create_checkout_session
 
 
@@ -18,13 +18,14 @@ class User(AbstractUser):
 
 
 # Ошибка скорее всего связана с импортом из courses.models, который ссылается на модели курсов и уроков до их объявления.
+from courses.models import Lesson, Course
 
 
 class Payment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE)
     payment_date = models.DateField()
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
-    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, null=True, blank=True)
+    course = models.ForeignKey('courses.Course', on_delete=models.CASCADE, null=True, blank=True)
+    lesson = models.ForeignKey('courses.Lesson', on_delete=models.CASCADE, null=True, blank=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     payment_method = models.CharField(max_length=20, choices=[('cash', 'Наличные'), ('transfer', 'Перевод на счет')])
     # Добавляем поля для связи с продуктом и ценой в Stripe
