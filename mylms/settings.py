@@ -87,7 +87,7 @@ DATABASES = {
         'USER': os.getenv('DB_USER', default=''),
         'PASSWORD': os.getenv('DB_PASSWORD', default=''),
         'PORT': '5432',
-        'HOST': 'db',
+        # 'HOST': 'db',
 
     }
 }
@@ -149,7 +149,7 @@ REST_FRAMEWORK = {
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 
 # URL-адрес брокера сообщений
-CELERY_BROKER_URL = 'redis://localhost:6379'  # Например, Redis, который по умолчанию работает на порту 6379
+CELERY_BROKER_URL = 'redis://redis:6379'  # Например, Redis, который по умолчанию работает на порту 6379
 
 # URL-адрес брокера результатов, также Redis
 CELERY_RESULT_BACKEND = 'redis://redis:6379' #меняла 'redis://localhost:6379'
